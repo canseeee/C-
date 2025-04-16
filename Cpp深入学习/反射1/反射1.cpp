@@ -1,3 +1,5 @@
+#include <iostream>
+#include <ostream>
 #include <string>
 #include <tuple>
 using namespace std;
@@ -52,6 +54,12 @@ struct Person final
     }
 };
 
+template<typename T, typename Class>
+struct variable_traits {
+    using value_type = T;
+    using class_type = Class;
+};
+
 // 类型信息模板（前置声明）
 template<typename T>
 struct TypeInfo;
@@ -77,14 +85,70 @@ using function_pointer_type_t = decltype(function_pointer_type(F));
 template<auto F>
 using function_traits_t = function_traits<function_pointer_type_t<F>>;
 
+template <typename T>
+struct is_function
+{
+    static constexpr bool value = std::is_function_v<T> || std::is_member_function_pointer_v<T>;
+};
+
+template <typename T>
+constexpr bool is_function_v = is_function<T>::value;
+
+
+template<typename T>
+struct basic_field_traits;
+
+template<typename T>
+struct basic_field_traits<T,true>:public function_traits<T>
+{
+    using traits = function_traits<T>;
+    constexpr bool is_member() const {return traits::is_member;}
+    constexpr bool is_const() const {return traits::is_const;}
+    constexpr bool is_function() const {return traits::is_function;}
+    constexpr bool is_variable() const {return false;}
+};
+
+template<typename T>
+struct basic_field_traits<T,false>:public variable_traits<T>
+{
+    using traits = function_traits<T>;
+    constexpr bool is_member() const {return traits::is_member;}
+    constexpr bool is_const() const {return traits::is_const;}
+    constexpr bool is_function() const {return false;}
+    constexpr bool is_variable() const {return true;}
+};
+
 // 成员变量特征模板
 template<typename T>
-struct field_traits
+struct field_traits :public basic_field_traits<T,is_function<T>>
 {
     // constexpr :这个关键字表明该构造函数可以在编译时执行，意味着在编译阶段就能创建field_traits对象。这在元编程中非常有用，能让一些操作在编译时完成，提升运行时的性能!
     constexpr field_traits(T&& pointer):pointer{pointer} {}
     T pointer;  // 存储成员变量/函数指针
 };
+
+#define BEGIN_CLASS(X) template<> struct TypeInfo<X>{
+
+#define functions(...) static constexpr auto functions = std::make_tuple(__VA_ARGS__);
+#define func(F) field_traits{F}
+
+#define END_CLASS()     \
+    }                   \
+    ;
+
+BEGIN_CLASS(Person)
+    functions(
+        func(&Person::GetMarried),
+        func(&Person::IsFemale),
+        func(&Person::IntroduceMyself)
+    )
+END_CLASS()
+
+template<typename T>
+constexpr auto type_info()
+{
+    return TypeInfo<T>{};
+}
 
 // Person类型的特化信息
 template<>
@@ -94,8 +158,11 @@ struct TypeInfo<Person>
     using functions = std::tuple<function_traits_t<&Person::IntroduceMyself>>;
 };
 
+
+
 int main(int argc, char* argv[])
 {
+    
     // 获取成员变量类型信息（示例，实际代码中variable_traits未定义）
     using nameType = variable_traits<decltype(&Person::familyname)>;
     using funcType = variable_traits<decltype(&Person::GetMarried)>;
@@ -111,7 +178,14 @@ int main(int argc, char* argv[])
     static_assert(std::is_same_v<type3,bool (Person::*)() const>);   // 应匹配IsFemale类型
 
     // 创建成员函数特征对象
-    auto field=field_traits(&Person::GetMarried); // 推导普通成员函数
+    //auto field=field_traits(&Person::GetMarried); // 推导普通成员函数
+
+    auto field=field_traits(&Person::GetMarried); // 推导const成员函数
+    cout<<field.is_member<<endl;
+    cout<<field.is_const<<endl;
+    cout<<(field.pointer==&Person::GetMarried)<<endl;
+
+    constexpr auto info=type_info<Person>();
     
     return 0;
 }
