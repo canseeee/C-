@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "网易雷火笔试", "网�
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "反射1", "反射1\反射1.vcxproj", "{19B83FAD-3A91-469C-A365-046337DC40EE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "实现Vector", "实现Vector\实现Vector.vcxproj", "{6D1C1352-4591-41B7-9E59-591819A7D623}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -58,5 +60,13 @@ Global
 		{19B83FAD-3A91-469C-A365-046337DC40EE}.Release|Win32.Build.0 = Release|Win32
 		{19B83FAD-3A91-469C-A365-046337DC40EE}.Release|x64.ActiveCfg = Release|x64
 		{19B83FAD-3A91-469C-A365-046337DC40EE}.Release|x64.Build.0 = Release|x64
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Debug|Win32.Build.0 = Debug|Win32
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Debug|x64.ActiveCfg = Debug|x64
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Debug|x64.Build.0 = Debug|x64
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Release|Win32.ActiveCfg = Release|Win32
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Release|Win32.Build.0 = Release|Win32
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Release|x64.ActiveCfg = Release|x64
+		{6D1C1352-4591-41B7-9E59-591819A7D623}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 EndGlobal
