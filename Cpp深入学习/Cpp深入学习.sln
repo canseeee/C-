@@ -12,6 +12,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "反射1", "反射1\反射1.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "实现Vector", "实现Vector\实现Vector.vcxproj", "{6D1C1352-4591-41B7-9E59-591819A7D623}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "转换阿拉伯数字", "转换阿拉伯数字\转换阿拉伯数字.vcxproj", "{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -68,5 +70,13 @@ Global
 		{6D1C1352-4591-41B7-9E59-591819A7D623}.Release|Win32.Build.0 = Release|Win32
 		{6D1C1352-4591-41B7-9E59-591819A7D623}.Release|x64.ActiveCfg = Release|x64
 		{6D1C1352-4591-41B7-9E59-591819A7D623}.Release|x64.Build.0 = Release|x64
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Debug|Win32.Build.0 = Debug|Win32
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Debug|x64.ActiveCfg = Debug|x64
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Debug|x64.Build.0 = Debug|x64
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Release|Win32.ActiveCfg = Release|Win32
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Release|Win32.Build.0 = Release|Win32
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Release|x64.ActiveCfg = Release|x64
+		{50DF9A51-DDF2-44EE-A48A-230CE5728EAD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 EndGlobal
